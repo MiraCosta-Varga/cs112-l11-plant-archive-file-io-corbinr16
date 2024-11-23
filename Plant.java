@@ -16,25 +16,60 @@ public class Plant {
 
 	public Plant(String name, double tempFahrenheit, String uses) throws IllegalArgumentException {
 		if(!this.setName(name)) {
-			throw new IllegalArgumentException("Invalid name value passed: " + name);
+			throw new 
+			IllegalArgumentException("Invalid name value passed: " + name);
 		}
 		if(!this.setTempFahrenheit(tempFahrenheit)) {
-			throw new IllegalArgumentException("Invalid temperature (F) value passed: " + tempFahrenheit);
+			throw new 
+			IllegalArgumentException("Invalid temperature (F) value passed: " + tempFahrenheit);
 		}
 		if(!this.setUses(uses)) {
-			throw new IllegalArgumentException("Invalid uses value passed: " + uses);
+			throw new 
+			IllegalArgumentException("Invalid uses value passed: " + uses);
 		}
 	}
 
 	public Plant(Plant original) throws IllegalArgumentException {
 		if(original == null) {
-			throw new IllegalArgumentException("Invalid Plant object to copy passed (null)");
+			throw new 
+			IllegalArgumentException("Invalid Plant object to copy passed (null)");
 		}
 		this.setAll(original.name, original.tempFahrenheit, original.uses);
 	}
 
 	//TODO: Step 1 = CSV string constructor
+	public Plant(String csv) {
 
+		double temp;
+
+		if (csv == null || csv.length() == 0) {
+			throw new 
+			IllegalArgumentException("No csv string given to constructor");
+		}
+		
+		String[] parts = csv.split(",");
+
+		if (parts.length != 3) {
+			throw new
+			IllegalArgumentException("csv string doesn't have the required number of values. Input = " + csv);
+		}
+
+		String name = parts[0];
+
+		try {
+			temp = Double.parseDouble(parts[1]);
+		} catch (NumberFormatException nfe) {
+			throw new 
+			IllegalArgumentException("csv doesn't have a valid temp at the second value in the csv string" + parts[1]);
+		}
+		
+		String uses = parts[2];
+
+		if (!this.setAll(name, temp, uses)) {
+			throw new 
+			IllegalArgumentException("INVALID DATA PROIVIDED after parsing. Input: " + name + temp + uses);
+		}
+	}
 
 
 
