@@ -15,6 +15,7 @@ public class Main
 
 		//TODO: Step 2 - Declare + initialize variables for file input here
 		Scanner inputFile = null;
+		ArrayList<Plant> myPlants = new ArrayList<Plant>();
 		
 		//TODO: Step 2 - Connect input stream to file (dont forget the try/catch!)
 		try {
@@ -26,17 +27,20 @@ public class Main
 
 		//TODO: Step 2 - create loop to read through whole file
 		while (inputFile.hasNextLine()) {
-			System.out.println(inputFile.nextLine());
-		}
 
 			//TODO: Step 3 - build Plant Objects and store into ArrayList
-
-
+			//System.out.println(inputFile.nextLine());
+			String currentLine = inputFile.nextLine();
+			Plant currentPlant = new Plant(currentLine);
+			myPlants.add(currentPlant);
+		}
 
 		//TODO: Step 2 - close the input stream
 		inputFile.close();
 
 		//TODO: Step 3 - print contents of ArrayList
-
+		for (Plant p : myPlants) {
+			System.out.println(p + "\n");
+		}
 	}
 }
